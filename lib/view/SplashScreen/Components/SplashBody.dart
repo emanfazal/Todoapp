@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Providers/Splashprovider.dart';
-import 'package:flutter_application_1/Providers/Splashprovider.dart';
-import 'package:flutter_application_1/Providers/Splashprovider.dart';
-import 'package:flutter_application_1/Providers/Splashprovider.dart';
-import 'package:provider/provider.dart';
-
-import '../../../Providers/Splashprovider.dart';
-import '../../../Providers/Splashprovider.dart';
 
 class SplashBody extends StatelessWidget {
   const SplashBody({super.key});

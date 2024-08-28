@@ -2,10 +2,18 @@
 class Assets {
   Assets._();
 
+  static const String imagesBeproductive = 'asset/images/beproductive.png';
+  static const String imagesFilterIcon = 'asset/images/filterIcon.png';
+  static const String imagesGoogleGradienticon2 = 'asset/images/googleGradienticon2.png';
   static const String imagesGoogleicon = 'asset/images/googleicon.png';
+  static const String imagesGradientgoogleicon = 'asset/images/gradientgoogleicon.png';
+  static const String imagesListIcon = 'asset/images/listIcon.png';
   static const String imagesLoginpageimage = 'asset/images/Loginpageimage.png';
+  static const String imagesReminderimage = 'asset/images/reminderimage.png';
   static const String imagesTodolist1 = 'asset/images/todolist1.png';
   static const String imagesTodologo = 'asset/images/todologo.png';
   static const String imagesTodologodark = 'asset/images/todologodark.png';
+  static const String imagesTransparentGoogleIcon = 'asset/images/transparentGoogleIcon.png';
+  static const String imagesWhitegoogleicon = 'asset/images/whitegoogleicon.png';
 
 }

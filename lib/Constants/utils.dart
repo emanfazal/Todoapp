@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Constants/sizer_utils.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static const Color primaryColor = Color(0xFFFF426E);
@@ -16,28 +17,43 @@ class AppText {
   static const String WelcomeText = "Welcome";
   static const String StartyourDay="Start your Day & Be Productive";
   static const String ContinuewithGoogle="Continue with google";
+  static const String Todolist="List of To Do";
 }
 
 class TextStyles {
-  static const h2height20 = TextStyle(
+  static final h2height19 = GoogleFonts.alef(
+    fontSize: 19,
+    height: 1,
+    color: AppColors.ButtonTextcolor,
+  );
+
+  static final h2height20 = GoogleFonts.alef(
     fontSize: 20,
     height: 1,
-    fontFamily: 'NunitoSans',
     color: AppColors.ButtonTextcolor,
-    // fontFamily:
   );
-  static const h2height50 = TextStyle(
+
+  static final h2height50 = GoogleFonts.alef(
+
     fontSize: 35,
     height: 1,
-    fontFamily: 'NunitoSans',
     color: AppColors.primaryColor,
-    // fontFamily:
   );
-  static const h2height45 = TextStyle(
+
+  static final h2height45 = GoogleFonts.alef(
     fontSize: 30,
     height: 1,
-    fontFamily: 'NunitoSans',
     color: AppColors.Gradient2,
-    // fontFamily:
+  );
+  static final btextheight20 = GoogleFonts.alef(
+    fontSize: 20,
+    height: 1,
+    color: AppColors.primaryColor,
+  );
+  static final appbartextheight20 = GoogleFonts.alef(
+    fontSize: 20,
+    height: 1,
+    color:AppColors.secondaryColor,
+    fontWeight:FontWeight.bold,
   );
 }
