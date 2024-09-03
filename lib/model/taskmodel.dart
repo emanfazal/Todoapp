@@ -6,16 +6,17 @@ class Todo {
   bool isDone;
   Timestamp CreatedOn;
   Timestamp UpdatedOn;
+  Timestamp? dueDateTime; // This will store both date and time
 
   Todo({
-    required this.id, // Add id to the constructor
+    required this.id,
     required this.task,
     required this.isDone,
     required this.CreatedOn,
     required this.UpdatedOn,
+    this.dueDateTime,
   });
 
-  // Modify fromJson to handle id
   Todo.fromJson(Map<String, dynamic> json, String id)
       : this(
     id: id,
@@ -23,6 +24,7 @@ class Todo {
     isDone: json["isDone"] as bool,
     CreatedOn: json["CreatedOn"] as Timestamp,
     UpdatedOn: json["UpdatedOn"] as Timestamp,
+    dueDateTime: json["dueDateTime"] as Timestamp?,
   );
 
   Todo copyWith({
@@ -31,6 +33,7 @@ class Todo {
     bool? isDone,
     Timestamp? CreatedOn,
     Timestamp? UpdatedOn,
+    Timestamp? dueDateTime,
   }) {
     return Todo(
       id: id ?? this.id,
@@ -38,6 +41,7 @@ class Todo {
       isDone: isDone ?? this.isDone,
       CreatedOn: CreatedOn ?? this.CreatedOn,
       UpdatedOn: UpdatedOn ?? this.UpdatedOn,
+      dueDateTime: dueDateTime ?? this.dueDateTime,
     );
   }
 
@@ -47,6 +51,7 @@ class Todo {
       "isDone": isDone,
       "CreatedOn": CreatedOn,
       "UpdatedOn": UpdatedOn,
+      "dueDateTime": dueDateTime,
     };
   }
 }

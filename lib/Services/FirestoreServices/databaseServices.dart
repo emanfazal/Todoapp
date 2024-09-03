@@ -12,7 +12,6 @@ class DatabaseService {
       fromFirestore: (snapshots, _) {
         final data = snapshots.data();
         if (data != null) {
-          // Pass both the data and the document ID
           return Todo.fromJson(data as Map<String, dynamic>, snapshots.id);
         } else {
           throw Exception('Data is null');
@@ -28,5 +27,23 @@ class DatabaseService {
 
   Future<void> addTodo(Todo todo) async {
     await _todosRef.add(todo);
+  }
+
+  Future<void> updateTodo(Todo todo) async {
+    try {
+      await _todosRef.doc(todo.id).set(todo, SetOptions(merge: true));
+    } catch (e) {
+      print("Error updating Todo: $e");
+      throw e;
+    }
+  }
+
+  Future<void> deleteTodo(String id) async {
+    try {
+      await _todosRef.doc(id).delete();
+    } catch (e) {
+      print("Error deleting Todo: $e");
+      throw e;
+    }
   }
 }

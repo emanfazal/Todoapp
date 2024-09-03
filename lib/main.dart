@@ -33,11 +33,13 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return MultiProvider(
           providers: [
+            ChangeNotifierProvider(create: (_) => TodoProvider()),
+            ChangeNotifierProvider(create: (_) => BottomNavProvider()),
             ChangeNotifierProvider(create: (_) => SplashScreenProvider()),
-            ChangeNotifierProvider(create: (_)=>BottomNavProvider()),
             ChangeNotifierProvider(create: (_) => AuthProvider()),
             ChangeNotifierProvider(create: (_) => UserProvider()),
-            ChangeNotifierProvider(create: (_) => TodoProvider()),
+
+
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

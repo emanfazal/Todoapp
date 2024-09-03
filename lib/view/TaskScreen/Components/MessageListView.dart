@@ -8,28 +8,24 @@ class MessageListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      // height: MediaQuery.of(context).height * 0.80,
-      // width: MediaQuery.of(context).width,
-      child: Consumer<TodoProvider>(
-        builder: (context, todoProvider, child) {
-          if (todoProvider.todos.isEmpty) {
-            return Center(child: Text('No messages found.'));
-          } else {
-            return ListView.builder(
-              itemCount: todoProvider.todos.length,
-              itemBuilder: (context, index) {
-                final todo = todoProvider.todos[index];
-                return ListTile(
-                  title: Text(todo.task),
-                  subtitle: Text('Completed: ${todo.isDone ? "Yes" : "No"}'),
-                  trailing: Text('ID: ${todo.id}'),
-                );
-              },
-            );
-          }
-        },
-      ),
+    return Consumer<TodoProvider>(
+      builder: (context, todoProvider, child) {
+        if (todoProvider.todos.isEmpty) {
+          return Center(child: Text('No messages found.'));
+        } else {
+          return ListView.builder(
+            itemCount: todoProvider.todos.length,
+            itemBuilder: (context, index) {
+              final todo = todoProvider.todos[index];
+              return ListTile(
+                title: Text(todo.task),
+                subtitle: Text('Completed: ${todo.isDone ? "Yes" : "No"}'),
+                trailing: Text('ID: ${todo.id}'),
+              );
+            },
+          );
+        }
+      },
     );
   }
 }

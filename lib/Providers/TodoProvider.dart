@@ -1,35 +1,45 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/model/taskmodel.dart';
-import '../Services/FirestoreServices/databaseServices.dart';
+import '../model/taskmodel.dart';
 
-class TodoProvider with ChangeNotifier {
-  final DatabaseService _databaseService = DatabaseService();
-
+class TodoProvider extends ChangeNotifier {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<Todo> _todos = [];
+
   List<Todo> get todos => _todos;
 
-  TodoProvider() {
-    fetchTodos();
-  }
-
-  void fetchTodos() {
-    _databaseService.getTodo().listen((snapshot) {
-      _todos = snapshot.docs.map((doc) {
-        // Get the document ID
-        final id = doc.id;
-
-        // Create a Todo object with the document ID
-        return Todo.fromJson(doc.data() as Map<String, dynamic>, id);
-      }).toList();
-      notifyListeners();
+  Future<void> fetchTodos() async {
+    final snapshot = await _firestore.collection('todos').get();
+    _todos = snapshot.docs
+        .map((doc) => Todo.fromJson(doc.data(), doc.id))
+        .toList();
+    // Sort todos by dueDateTime
+    _todos.sort((a, b) {
+      if (a.dueDateTime == null && b.dueDateTime == null) {
+        return 0;
+      } else if (a.dueDateTime == null) {
+        return 1; // Tasks with no dueDateTime come last
+      } else if (b.dueDateTime == null) {
+        return -1; // Tasks with no dueDateTime come last
+      } else {
+        return a.dueDateTime!.compareTo(b.dueDateTime!);
+      }
     });
+    notifyListeners();
   }
 
   Future<void> addTodo(Todo todo) async {
-    try {
-      await _databaseService.addTodo(todo);
-    } catch (e) {
-      print("Error adding Todo: $e");
-    }
+    await _firestore.collection('todos').add(todo.toJson());
+    fetchTodos();
+  }
+
+  Future<void> updateTodo(Todo todo) async {
+    await _firestore.collection('todos').doc(todo.id).update(todo.toJson());
+    fetchTodos();
+  }
+
+  Future<void> deleteTodo(String id) async {
+    await _firestore.collection('todos').doc(id).delete();
+    fetchTodos();
   }
 }
