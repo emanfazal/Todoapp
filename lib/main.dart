@@ -1,14 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:workmanager/workmanager.dart';
 import 'package:flutter_application_1/Constants/apptheme.dart';
 import 'package:flutter_application_1/Providers/Splashprovider.dart';
 import 'package:flutter_application_1/Providers/UserProvider.dart';
+import 'package:flutter_application_1/Services/NotificationServices/NotificationServices.dart';
+import 'package:flutter_application_1/Services/NotificationServices/Workmanager.dart';
 import 'package:flutter_application_1/firebase_options.dart';
 import 'package:flutter_application_1/routers.dart';
 import 'package:flutter_application_1/view/SplashScreen/Splashscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:workmanager/workmanager.dart';
 
 import 'Providers/BottomNavProvider.dart';
 import 'Providers/TodoProvider.dart';
@@ -17,10 +21,23 @@ import 'controllers/usercontroller.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  Workmanager().initialize(
+    NotificationHelper.callbackDispatcher,
+    isInDebugMode: true, // Set this to false in production
+  ); // Initialize WorkManager
+
+   NotificationHelper.initNotificationsAndService();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-FirebaseFirestore.instance.settings=const Settings(
+
+
+  FirebaseFirestore.instance.settings=const Settings(
   persistenceEnabled: true,
 );
+
+
+
+
+// scheduleTestNotification();
   runApp(const MyApp());
 }
 
@@ -52,3 +69,15 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// void scheduleTestNotification() {
+//   final scheduledTime = DateTime.now().add(Duration(seconds: 5));
+//   NotificationHelper.scheduledNotification(
+//     'Test Task',
+//     'This is a test notification!',
+//     scheduledTime,
+//   );
+// }
+
+
+
+

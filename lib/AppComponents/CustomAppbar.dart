@@ -18,7 +18,9 @@ class CustomAppBar extends StatelessWidget {
           SizedBox(width: 30,),
           Text(AppText.Todolist,style: TextStyles.appbartextheight20,),
           Spacer(),
-        IconButton(onPressed: (){}, icon:   Image.asset(Assets.imagesFilterIcon))
+        IconButton(onPressed: (){
+
+        }, icon:   Image.asset(Assets.imagesFilterIcon))
         ],
         ),
       ),

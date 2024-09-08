@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../Providers/TodoProvider.dart';
 import '../../../model/taskmodel.dart';
-import '../Constants/utils.dart'; // Ensure this imports AppColors
+import '../Constants/utils.dart';
+import '../Services/NotificationServices/NotificationServices.dart';
 
 class TaskDialogHelper {
   // Method to show Add Task Dialog
@@ -42,7 +43,6 @@ class TaskDialogHelper {
                     final selectedDate = await _selectDueDate(context);
                     if (selectedDate != null) {
                       selectedDueDate = selectedDate;
-                      // To refresh the button text
                       (context as Element).markNeedsBuild();
                     }
                   },
@@ -56,7 +56,6 @@ class TaskDialogHelper {
                     final selectedTime = await _selectDueTime(context);
                     if (selectedTime != null) {
                       selectedDueTime = selectedTime;
-                      // To refresh the button text
                       (context as Element).markNeedsBuild();
                     }
                   },
@@ -89,6 +88,9 @@ class TaskDialogHelper {
                       dueDateTime: Timestamp.fromDate(dueDateTime),
                     );
                     Provider.of<TodoProvider>(context, listen: false).addTodo(newTodo);
+
+                    // Schedule notification
+
                     Navigator.of(context).pop();
                   }
                 },
@@ -100,7 +102,6 @@ class TaskDialogHelper {
     );
   }
 
-  // Method to show Edit Task Dialog
   static void showEditTaskDialog(BuildContext context, Todo todo) {
     final TextEditingController taskController = TextEditingController(text: todo.task);
     DateTime? selectedDueDate = todo.dueDateTime?.toDate();
@@ -112,7 +113,7 @@ class TaskDialogHelper {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.light(
-              primary: AppColors.primaryColor, // Apply your primary color
+              primary: AppColors.primaryColor,
             ),
             buttonTheme: ButtonThemeData(
               textTheme: ButtonTextTheme.primary,
@@ -136,7 +137,6 @@ class TaskDialogHelper {
                     final pickedDate = await _selectDueDate(context);
                     if (pickedDate != null) {
                       selectedDueDate = pickedDate;
-                      // To refresh the button text
                       (context as Element).markNeedsBuild();
                     }
                   },
@@ -150,7 +150,6 @@ class TaskDialogHelper {
                     final pickedTime = await _selectDueTime(context);
                     if (pickedTime != null) {
                       selectedDueTime = pickedTime;
-                      // To refresh the button text
                       (context as Element).markNeedsBuild();
                     }
                   },
@@ -180,6 +179,10 @@ class TaskDialogHelper {
                       dueDateTime: Timestamp.fromDate(dueDateTime),
                     );
                     Provider.of<TodoProvider>(context, listen: false).updateTodo(updatedTodo);
+
+                    // Schedule notification
+
+
                     Navigator.of(context).pop();
                   }
                 },
@@ -191,7 +194,6 @@ class TaskDialogHelper {
     );
   }
 
-  // Method to select Due Date with Theme
   static Future<DateTime?> _selectDueDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -215,7 +217,6 @@ class TaskDialogHelper {
     return pickedDate;
   }
 
-  // Method to select Due Time with Theme
   static Future<TimeOfDay?> _selectDueTime(BuildContext context) async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,

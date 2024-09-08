@@ -3,8 +3,9 @@ import 'package:provider/provider.dart';
 import '../../../AppComponents/TaskDialog.dart';
 import '../../../Constants/utils.dart';
 import '../../../Providers/TodoProvider.dart';
+import '../../../Services/NotificationServices/NotificationServices.dart';
 import '../../../model/taskmodel.dart';
-// Import the helper class
+ // Import the helper class
 
 class TaskBody extends StatelessWidget {
   const TaskBody({super.key});
@@ -20,6 +21,18 @@ class TaskBody extends StatelessWidget {
             itemCount: todoProvider.todos.length,
             itemBuilder: (context, index) {
               final todo = todoProvider.todos[index];
+
+              // Schedule notification if the task has a due date
+              if (todo.dueDateTime != null) {
+                NotificationHelper.scheduledNotification(
+                  todo.task, // Title of the Notification
+                  'Task is due soon!', // Content/Body of the Notification
+                  todo.dueDateTime!.toDate(), // Scheduled Time for the Notification
+                  todo.id, // Pass task ID
+                );
+              }
+
+
               return Card(
                 surfaceTintColor: AppColors.primaryColor,
                 shadowColor: AppColors.Gradient1,

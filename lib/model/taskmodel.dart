@@ -17,6 +17,20 @@ class Todo {
     this.dueDateTime,
   });
 
+  // Create a Todo object from a Firestore DocumentSnapshot
+  factory Todo.fromSnapshot(DocumentSnapshot snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>;
+    return Todo(
+      id: snapshot.id,
+      task: data['task'] as String,
+      isDone: data['isDone'] as bool,
+      CreatedOn: data['CreatedOn'] as Timestamp,
+      UpdatedOn: data['UpdatedOn'] as Timestamp,
+      dueDateTime: data['dueDateTime'] as Timestamp?,
+    );
+  }
+
+  // Create a Todo object from a JSON map
   Todo.fromJson(Map<String, dynamic> json, String id)
       : this(
     id: id,
