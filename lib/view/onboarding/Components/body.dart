@@ -23,7 +23,7 @@ class BoardingBody extends StatelessWidget {
           PageViewModel(
             title: title,
             bodyWidget: Center(
-              child: Text('Start Your Day and Be Productive',style:TextStyles.btextheight20),
+              child: Text('Start Your Day and Be Productive',style:TextStyles.btextheight20(context)),
             ),
             image: Image.asset(
               Assets.imagesBeproductive,
@@ -35,7 +35,7 @@ class BoardingBody extends StatelessWidget {
            bodyWidget: Center(
              child: Text(' Create multiple to-do lists, add '
                  'tasks with due dates and priorities, and track your progress effortlessly.',
-               style:TextStyles.btextheight20,),
+               style:TextStyles.btextheight20(context),),
            ),
             image: Image.asset(
               Assets.imagesLoginpageimage,
@@ -47,7 +47,7 @@ class BoardingBody extends StatelessWidget {
             bodyWidget: Center(
               child: Text('Stay on top of your tasks with reminders and '
               'notifications. Boost your productivity and achieve your goals with MyTasks. ',
-                  style:TextStyles.btextheight20
+                  style:TextStyles.btextheight20(context)
               ),
             ),
             image: Image.asset(

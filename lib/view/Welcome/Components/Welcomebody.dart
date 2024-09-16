@@ -65,7 +65,7 @@ class WelcomeBody extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 30),
                       child: Text(
                         AppText.ContinuewithGoogle,
-                        style: TextStyles.h2height20,
+                        style: TextStyles.h2height20(context),
                       ),
                     ),
                   ],

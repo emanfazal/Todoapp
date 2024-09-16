@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
 
-      body: ProfileBody(),
+      body: SafeArea(child: ProfileBody(),),
     );
   }
 }

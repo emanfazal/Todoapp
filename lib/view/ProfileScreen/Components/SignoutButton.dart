@@ -11,28 +11,31 @@ class SignOutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
 
-    return
-      PopupMenuButton<String>(
-        surfaceTintColor: AppColors.Gradient1,
-        shadowColor: AppColors.primaryColor,
-        icon: Icon(Icons.edit),
-        onSelected: (String value) {
-          if (value == 'Sign Out') {
-authProvider.signOut(context);
-            print("Sign Out selected");
-
-          }
-        },
-        itemBuilder: (BuildContext context) {
-          return <PopupMenuEntry<String>>[
-            PopupMenuItem<String>(
-
-              value: 'Sign Out',
-              child: Text('Sign Out'),
-            ),
-          ];
-        },
-      );
-
+    return PopupMenuButton<String>(
+      surfaceTintColor: AppColors.Gradient1,
+      shadowColor: AppColors.primaryColor,
+      icon: Center(
+        child: Icon(
+          size: 40,
+          Icons.logout_rounded,
+          color: AppColors.Gradient2
+        ),
+      ),
+      onSelected: (String value) {
+        if (value == 'Sign Out') {
+          authProvider.signOut(context);
+          print("Sign Out selected");
+        }
+      },
+      itemBuilder: (BuildContext context) {
+        return <PopupMenuEntry<String>>[
+          PopupMenuItem<String>(
+            value: 'Sign Out',
+            child: Text('Sign Out'),
+          ),
+        ];
+      },
+      offset: Offset(50, -20), // Adjust this offset as needed to position the menu
+    );
   }
 }

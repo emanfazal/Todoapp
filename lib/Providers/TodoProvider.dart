@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 import '../model/taskmodel.dart';
 
 class TodoProvider extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<Todo> _todos = [];
+  List<Todo> _filteredTodos = [];
 
-  List<Todo> get todos => _todos;
+  List<Todo> get todos => _filteredTodos.isNotEmpty ? _filteredTodos : _todos;
 
   Future<void> fetchTodos() async {
     final snapshot = await _firestore.collection('todos').get();
@@ -18,9 +20,9 @@ class TodoProvider extends ChangeNotifier {
       if (a.dueDateTime == null && b.dueDateTime == null) {
         return 0;
       } else if (a.dueDateTime == null) {
-        return 1; // Tasks with no dueDateTime come last
+        return 1;
       } else if (b.dueDateTime == null) {
-        return -1; // Tasks with no dueDateTime come last
+        return -1;
       } else {
         return a.dueDateTime!.compareTo(b.dueDateTime!);
       }
@@ -42,4 +44,18 @@ class TodoProvider extends ChangeNotifier {
     await _firestore.collection('todos').doc(id).delete();
     fetchTodos();
   }
+
+  // Search functionality
+  void searchTodos(String query) {
+    if (query.isEmpty) {
+      _filteredTodos = [];
+    } else {
+      _filteredTodos = _todos
+          .where((todo) => todo != null &&
+          todo.task.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
+    notifyListeners();
+  }
+
 }

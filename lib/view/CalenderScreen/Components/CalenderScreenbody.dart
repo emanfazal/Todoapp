@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/view/CalenderScreen/Components/Calender.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:provider/provider.dart';
 
-class ScreenBody extends StatelessWidget {
-  const ScreenBody({super.key});
+import '../../../AppComponents/TaskDialog.dart';
+import '../../../Constants/utils.dart';
+import '../../../Providers/TodoProvider.dart';
+import 'Calender.dart';
+
+class CalenderScreenBody extends StatelessWidget {
+  const CalenderScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
+    return Column(
         children: [
-          Calender(),
+
+          Expanded(
+
+            child: Calender(),
+          ),
+
+
         ],
-      ),
+
     );
   }
+
+
+
 }
