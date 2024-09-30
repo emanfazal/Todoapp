@@ -20,5 +20,5 @@
 Complete UI Contains:
 
 ► Splash Screen ► OnBoarding Screen ►Welcome Screen(Sign IN) ►Home Page ► Task Screen ►Calender Screen ► Settings Screen
-![Image](./Todoapp/LightTheme.png)
+![Image](LightTheme.png)
 
