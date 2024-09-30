@@ -20,4 +20,4 @@
 Complete UI Contains:
 
 ► Splash Screen ► OnBoarding Screen ►Welcome Screen(Sign IN) ►Home Page ► Task Screen ►Calender Screen ► Settings Screen
-![Light Theme](https://github.com/user-attachments/assets/9f6634a1-26d8-4865-9e80-7a8d2e6402a8)
+![Light Theme](Light Theme.png)
